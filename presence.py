@@ -10,9 +10,9 @@ from importlib import reload
 from random import random
 from time import sleep, time
 
+from nasse.logging import log
 from pypresence import Presence
 from requests import get
-from nasse.logging import log
 
 import config
 
@@ -28,7 +28,8 @@ while True:
     log("Loading current settings")
     config = reload(config)
     log("Asking for the game data for UID {}".format(config.Player.HOYOLAB_UID))
-    user_data = get("https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard?uid={}".format(config.Player.HOYOLAB_UID), headers={"Cookie": config.Settings.COOKIE}).json()
+    user_data = get("https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard?uid={}".format(config.Player.HOYOLAB_UID),
+                    headers={"Cookie": config.Settings.COOKIE}).json()
     for game_data in user_data["data"]["list"]:
         if config.Player.SERVER_REGION is not None and game_data["region"] != config.Player.SERVER_REGION.code:
             continue
@@ -36,14 +37,15 @@ while True:
             log("Found {} data for {}".format(config.Player.GAME, game_data['region_name']))
             log("Updating the RPC Client")
             RPC.update(
-                state = "{} 〜 Playing on {}".format(game_data['nickname'], game_data['region_name']),
-                details = "Currently at AR {}".format(game_data['level']),
-                large_image = config.Player.GAME.image,
-                small_image = config.Player.CHARACTER.image,
-                large_text = str(config.Text.TEXT),
-                small_text = str(config.Text.CHARACTER_TEXT) if config.Text.CHARACTER_TEXT is not None else f"My favorite character is {config.Player.CHARACTER.name}",
-                start = START
+                state="{} 〜 Playing on {}".format(game_data['nickname'], game_data['region_name']),
+                details="Currently at AR {}".format(game_data['level']),
+                large_image=config.Player.GAME.image,
+                small_image=config.Player.CHARACTER.image,
+                large_text=str(config.Text.TEXT),
+                small_text=str(
+                    config.Text.CHARACTER_TEXT) if config.Text.CHARACTER_TEXT is not None else f"My favorite character is {config.Player.CHARACTER.name}",
+                start=START
             )
             break
     log("Waiting for the next update ({} seconds)".format(config.Settings.REFRESH_RATE))
-    sleep(config.Settings.REFRESH_RATE + random()) # random is used to humanize a little bit the refresh rate
+    sleep(config.Settings.REFRESH_RATE + random())  # random is used to humanize a little bit the refresh rate
