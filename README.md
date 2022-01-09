@@ -6,6 +6,8 @@ A Genshin Impact Rich Presence script
 
 genshin-presence is a little script which helps you show to everyone on Discord that you are playing Genshin and you current Adventure Rank (AR), Server, Favorite Character, etc.
 
+![example](./example.png)
+
 ## Prerequisit
 
 ### Python
