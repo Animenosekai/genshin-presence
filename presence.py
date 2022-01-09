@@ -14,37 +14,36 @@ from pypresence import Presence
 from requests import get
 from nasse.logging import log
 
-import current
+import config
 
 START = time()
 
 DISCORD_APPLICATION_ID = 929496938020208690  # Put your Discord Application ID
 
-log(f"Connecting to Discord RPC with Application ID {DISCORD_APPLICATION_ID}")
+log("Connecting to Discord RPC with Application ID {}".format(DISCORD_APPLICATION_ID))
 RPC = Presence(str(DISCORD_APPLICATION_ID))
 RPC.connect()
 
 while True:
     log("Loading current settings")
-    current = reload(current)
-    log(f"Asking for the game data for UID {current.Player.HOYOLAB_UID}")
-    user_data = get(
-        f"https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard?uid={current.Player.HOYOLAB_UID}", headers={"Cookie": current.Settings.COOKIE}).json()
+    config = reload(config)
+    log("Asking for the game data for UID {}".format(config.Player.HOYOLAB_UID))
+    user_data = get("https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard?uid={}".format(config.Player.HOYOLAB_UID), headers={"Cookie": config.Settings.COOKIE}).json()
     for game_data in user_data["data"]["list"]:
-        if current.Player.SERVER_REGION is not None and game_data["region"] != current.Player.SERVER_REGION.code:
+        if config.Player.SERVER_REGION is not None and game_data["region"] != config.Player.SERVER_REGION.code:
             continue
-        if game_data["game_id"] == current.Player.GAME.code:
-            log(f"Found {current.Player.GAME} data for {game_data['region_name']}")
+        if game_data["game_id"] == config.Player.GAME.code:
+            log("Found {} data for {}".format(config.Player.GAME, game_data['region_name']))
             log("Updating the RPC Client")
             RPC.update(
-                state = f"{game_data['nickname']} 〜 Playing on {game_data['region_name']}",
-                details = f"Currently at AR {game_data['level']}",
-                large_image = current.Player.GAME.image,
-                small_image = current.Player.CHARACTER.image,
-                large_text = str(current.Text.TEXT),
-                small_text = str(current.Text.CHARACTER_TEXT) if current.Text.CHARACTER_TEXT is not None else f"My favorite character is {current.Player.CHARACTER.name}",
+                state = "{} 〜 Playing on {}".format(game_data['nickname'], game_data['region_name']),
+                details = "Currently at AR {}".format(game_data['level']),
+                large_image = config.Player.GAME.image,
+                small_image = config.Player.CHARACTER.image,
+                large_text = str(config.Text.TEXT),
+                small_text = str(config.Text.CHARACTER_TEXT) if config.Text.CHARACTER_TEXT is not None else f"My favorite character is {config.Player.CHARACTER.name}",
                 start = START
             )
             break
-    log(f"Waiting for the next update ({current.Settings.REFRESH_RATE} seconds)")
-    sleep(current.Settings.REFRESH_RATE + random())
+    log("Waiting for the next update ({} seconds)".format(config.Settings.REFRESH_RATE))
+    sleep(config.Settings.REFRESH_RATE + random()) # random is used to humanize a little bit the refresh rate
