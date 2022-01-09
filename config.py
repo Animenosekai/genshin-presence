@@ -4,7 +4,7 @@ class Player:
     GAME = Games.GENSHIN
     CHARACTER = Characters.RAIDEN_SHOGUN
     HOYOLAB_UID = 71845688  # any account that has their game summary on their profile
-    SERVER_REGION = Servers.EUROPE  # leave as None to take the first one
+    SERVER_REGION = None  # leave as None to take the first one
 
 class Text:
     TEXT = "Come play with me!" # when the game image is hovered
