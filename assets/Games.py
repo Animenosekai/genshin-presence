@@ -1,12 +1,21 @@
-class Game():
-    def __init__(self, name: str, code: int, image: str) -> None:
-        self.name = name
-        self.code = code
-        self.image = image
+import dataclasses
+import pathlib
 
-    def __repr__(self) -> str:
-        return "Game({})".format(self.name)
+
+@dataclasses.dataclass(frozen=True)
+class Game:
+    name: str
+    code: int
+    image: str
+
+    @property
+    def image_path(self):
+        """"""
+        return (pathlib.Path(__file__).parent / "games" / self.image).with_suffix(
+            ".png"
+        )
 
 
 HONKAI = Game("Honkai Impact 3rd", 1, "game-honkai-3rd")
 GENSHIN = Game("Genshin Impact", 2, "game-genshin")
+
