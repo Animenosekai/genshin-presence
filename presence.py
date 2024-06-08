@@ -49,7 +49,7 @@ class GenshinPresence:
         self._runs: typing.Dict[typing.Tuple[int, int], bool] = {}
         "The (PID, THREAD_ID) -> RUNNING mapping"
 
-    def connect(self, application_id: int) -> Presence:
+    def connect(self, application_id: int) -> pypresence.Presence:
         """
         Connects to the Discord RPC
 
@@ -102,6 +102,8 @@ class GenshinPresence:
         )
         request.raise_for_status()
         user_data = request.json()
+        if not user_data:
+            raise ValueError("No data found")
         if "data" not in user_data:
             raise ValueError("No `data` found")
         if "list" not in user_data["data"]:
