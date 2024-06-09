@@ -17,11 +17,11 @@ A Genshin Impact Discord RPC Presence script which gives your AR and additional 
 
 ## *class* **GameData**
 
-> [Source: ../presence.py @ line 25-33](../presence.py#L25-L33)
+> [Source: ../presence.py @ line 24-32](../presence.py#L24-L32)
 
 ### *attr* GameData.**game**
 
-> [Source: ../presence.py @ line 26](../presence.py#L26)
+> [Source: ../presence.py @ line 25](../presence.py#L25)
 
 > Type: `games.Game`
 
@@ -29,7 +29,7 @@ The game
 
 ### *attr* GameData.**region**
 
-> [Source: ../presence.py @ line 28](../presence.py#L28)
+> [Source: ../presence.py @ line 27](../presence.py#L27)
 
 > Type: `str`
 
@@ -37,7 +37,7 @@ The region the player is playing in
 
 ### *attr* GameData.**name**
 
-> [Source: ../presence.py @ line 30](../presence.py#L30)
+> [Source: ../presence.py @ line 29](../presence.py#L29)
 
 > Type: `str`
 
@@ -45,7 +45,7 @@ The name of the player
 
 ### *attr* GameData.**level**
 
-> [Source: ../presence.py @ line 32](../presence.py#L32)
+> [Source: ../presence.py @ line 31](../presence.py#L31)
 
 > Type: `int`
 
@@ -53,7 +53,7 @@ The level of the player (ex: Adventure Rank on Genshin)
 
 ## *class* **GenshinPresence**
 
-> [Source: ../presence.py @ line 35-309](../presence.py#L35-L309)
+> [Source: ../presence.py @ line 35-317](../presence.py#L35-L317)
 
 The Genshin Impact Discord RPC Presence  
 It can connect to the Discord RPC and show the player's information while playing Genshin Impact
@@ -64,7 +64,7 @@ It can connect to the Discord RPC and show the player's information while playin
 
 ### *func* GenshinPresence.**connect**
 
-> [Source: ../presence.py @ line 62-78](../presence.py#L62-L78)
+> [Source: ../presence.py @ line 65-82](../presence.py#L65-L82)
 
 Connects to the Discord RPC
 
@@ -79,21 +79,23 @@ Connects to the Discord RPC
 - `Presence`
     - The Discord RPC Client
 
+- `pypresence.Presence`
+
 ### *func* GenshinPresence.**reset_start**
 
-> [Source: ../presence.py @ line 80-82](../presence.py#L80-L82)
+> [Source: ../presence.py @ line 84-86](../presence.py#L84-L86)
 
 Resets the start time
 
 ### *func* GenshinPresence.**reload_config**
 
-> [Source: ../presence.py @ line 84-86](../presence.py#L84-L86)
+> [Source: ../presence.py @ line 88-90](../presence.py#L88-L90)
 
 Reloads the configuration file
 
 ### *func* GenshinPresence.**retrieve_cookie**
 
-> [Source: ../presence.py @ line 88-109](../presence.py#L88-L109)
+> [Source: ../presence.py @ line 92-117](../presence.py#L92-L117)
 
 Retrieves the cookie from the configuration file
 
@@ -108,7 +110,7 @@ Retrieves the cookie from the configuration file
 
 ### *func* GenshinPresence.**get_game_data**
 
-> [Source: ../presence.py @ line 111-160](../presence.py#L111-L160)
+> [Source: ../presence.py @ line 119-168](../presence.py#L119-L168)
 
 Gets the game data from the HoYoLAB API
 
@@ -129,7 +131,7 @@ Gets the game data from the HoYoLAB API
 
 ### *func* GenshinPresence.**sleep**
 
-> [Source: ../presence.py @ line 162-179](../presence.py#L162-L179)
+> [Source: ../presence.py @ line 170-187](../presence.py#L170-L187)
 
 Sleeps for a random amount of time between `time` and `time` + 1 second
 
@@ -150,7 +152,7 @@ Sleeps for a random amount of time between `time` and `time` + 1 second
 
 ### *func* GenshinPresence.**update_rpc**
 
-> [Source: ../presence.py @ line 181-205](../presence.py#L181-L205)
+> [Source: ../presence.py @ line 189-213](../presence.py#L189-L213)
 
 Updates the Discord RPC Client with the game data
 
@@ -162,7 +164,7 @@ Updates the Discord RPC Client with the game data
 
 ### *func* GenshinPresence.**run**
 
-> [Source: ../presence.py @ line 207-253](../presence.py#L207-L253)
+> [Source: ../presence.py @ line 215-261](../presence.py#L215-L261)
 
 Runs the presence in a loop
 
@@ -171,7 +173,7 @@ Runs the presence in a loop
 
 ### *func* GenshinPresence.**stop**
 
-> [Source: ../presence.py @ line 255-273](../presence.py#L255-L273)
+> [Source: ../presence.py @ line 263-281](../presence.py#L263-L281)
 
 Stops the presence
 
@@ -187,7 +189,7 @@ Stops the presence
 
 ### *func* GenshinPresence.**flow**
 
-> [Source: ../presence.py @ line 275-309](../presence.py#L275-L309)
+> [Source: ../presence.py @ line 283-317](../presence.py#L283-L317)
 
 The main flow of the presence
 

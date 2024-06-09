@@ -12,7 +12,7 @@
 
 ## *class* **Player**
 
-> [Source: ../config.py @ line 8-16](../config.py#L8-L16)
+> [Source: ../config.py @ line 8-18](../config.py#L8-L18)
 
 ### *attr* Player.**GAME**
 
@@ -48,7 +48,7 @@ The server region of the player
 
 ## *class* **Text**
 
-> [Source: ../config.py @ line 20-39](../config.py#L20-L39)
+> [Source: ../config.py @ line 22-40](../config.py#L22-L40)
 
 Texts for the RPC Client  
 Available variables for the texts:  
@@ -60,7 +60,7 @@ Available variables for the texts:
 
 ### *attr* Text.**STATE_TEXT**
 
-> [Source: ../config.py @ line 32](../config.py#L32)
+> [Source: ../config.py @ line 33](../config.py#L33)
 
 > Type: `str`
 
@@ -68,7 +68,7 @@ The state text that will be displayed. Available variables: {name}, {region}
 
 ### *attr* Text.**DETAILS_TEXT**
 
-> [Source: ../config.py @ line 34](../config.py#L34)
+> [Source: ../config.py @ line 35](../config.py#L35)
 
 > Type: `str`
 
@@ -76,7 +76,7 @@ The details text that will be displayed. Available variables: {level}
 
 ### *attr* Text.**HOVER_TEXT**
 
-> [Source: ../config.py @ line 36](../config.py#L36)
+> [Source: ../config.py @ line 37](../config.py#L37)
 
 > Type: `str`
 
@@ -84,7 +84,7 @@ The text that will be displayed when the game image is hovered
 
 ### *attr* Text.**HOVER_CHARACTER_TEXT**
 
-> [Source: ../config.py @ line 38](../config.py#L38)
+> [Source: ../config.py @ line 39](../config.py#L39)
 
 > Type: `str`
 
@@ -92,13 +92,13 @@ The text that will be displayed when the character image is hovered. Available v
 
 ## *class* **Settings**
 
-> [Source: ../config.py @ line 43-51](../config.py#L43-L51)
+> [Source: ../config.py @ line 44-52](../config.py#L44-L52)
 
 Settings for the RPC Client
 
 ### *attr* Settings.**REFRESH_RATE**
 
-> [Source: ../config.py @ line 46](../config.py#L46)
+> [Source: ../config.py @ line 47](../config.py#L47)
 
 > Type: `Union`
 
@@ -106,7 +106,7 @@ The rate at which the RPC Client will update the presence
 
 ### *attr* Settings.**DISCORD_APPLICATION_ID**
 
-> [Source: ../config.py @ line 48](../config.py#L48)
+> [Source: ../config.py @ line 49](../config.py#L49)
 
 > Type: `int`
 
@@ -114,7 +114,7 @@ The Discord Application ID
 
 ### *attr* Settings.**COOKIE**
 
-> [Source: ../config.py @ line 50](../config.py#L50)
+> [Source: ../config.py @ line 51](../config.py#L51)
 
 > Type: `Optional`
 
