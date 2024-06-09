@@ -37,7 +37,7 @@ def main(browser: Browser = Browser.CHROMIUM, executable: typing.Optional[str] =
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Get the cookie from the HoYoLAB website")
-    parser.add_argument("--browser", default="chromium", choices=["chromium", "firefox", "webkit"], help="The browser to use")
+    parser.add_argument("--browser", default="chromium", choices=["chromium", "firefox", "webkit"], help="The browser to use (default: chromium)")
     parser.add_argument("--executable", default=None, help="The path to the browser executable (optional)")
     args = parser.parse_args()
     main(browser=Browser(args.browser), executable=args.executable)
