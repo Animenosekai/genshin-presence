@@ -1,7 +1,7 @@
 """
 presence.py
+
 A Genshin Impact Discord RPC Presence script which gives your AR and additional information while playing.
-https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard?uid=39079082
 """
 import dataclasses
 import importlib
@@ -11,6 +11,7 @@ import threading
 import time
 import types
 import typing
+import pathlib
 
 import nasse
 import pypresence
@@ -23,12 +24,21 @@ from nasse.utils.formatter import format
 @dataclasses.dataclass
 class GameData:
     game: games.Game
+    """The game"""
     region: str
+    """The region the player is playing in"""
     name: str
+    """The name of the player"""
     level: int
-
+    """The level of the player (ex: Adventure Rank on Genshin)"""
 
 class GenshinPresence:
+    """
+    The Genshin Impact Discord RPC Presence
+
+    It can connect to the Discord RPC and show the player's information while playing Genshin Impact
+    """
+
     def __init__(self, config: types.ModuleType) -> None:
         """
         Initializes the presence
@@ -75,6 +85,29 @@ class GenshinPresence:
         """Reloads the configuration file"""
         self.config = importlib.reload(self.config)
 
+    def retrieve_cookie(self) -> str:
+        """
+        Retrieves the cookie from the configuration file
+
+        Returns
+        -------
+        str
+            The cookie
+        """
+        result = ""
+        if self.config.Settings.COOKIE:
+            result = self.config.Settings.COOKIE
+            result = str(result).strip()
+        if not result and "COOKIE" in os.environ:
+            result = os.environ["COOKIE"]
+            result = str(result).strip()
+        path = pathlib.Path(__file__).parent / "COOKIE"
+        if not result and path.is_file():
+            result = path.read_text().strip()
+        if not result:
+            raise ValueError("No cookie found")
+        return result
+
     def get_game_data(self, hoyolab_uid: int) -> GameData:
         """
         Gets the game data from the HoYoLAB API
@@ -93,11 +126,14 @@ class GenshinPresence:
         ValueError
             When no game data is found
         """
-        if not self.config.Settings.COOKIE:
-            self.logger.warn("The `COOKIE` setting ")
+        try:
+            cookie = self.retrieve_cookie()
+        except ValueError:
+            self.logger.warn("Couldn't find the cookie in the configuration file")
+            cookie = ""
         request = requests.get(
             "https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard",
-            headers={"Cookie": self.config.Settings.COOKIE},
+            headers={"Cookie": cookie},
             params={"uid": hoyolab_uid},
         )
         request.raise_for_status()
@@ -125,7 +161,7 @@ class GenshinPresence:
 
     def sleep(self, amount: typing.Optional[typing.Union[int, float]] = None) -> float:
         """
-        Sleeps for a random amount of time between the refresh rate and the `time` + 1 second
+        Sleeps for a random amount of time between `time` and `time` + 1 second
 
         Parameters
         ----------
@@ -169,7 +205,12 @@ class GenshinPresence:
         )
 
     def run(self) -> None:
-        """Runs the presence"""
+        """
+        Runs the presence in a loop
+        
+        Warning: This method is blocking
+        """
+        # Avoid overlapping with other instances if ran in another thread
         pid, tid = (os.getpid(), threading.get_ident())
         self._runs[pid, tid] = True
         self.logger.print(

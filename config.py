@@ -21,7 +21,7 @@ class Text:
     """
     Texts for the RPC Client
     
-    Availabel variables for the texts:
+    Available variables for the texts:
     - {name}: The nickname of the player
     - {region}: The name of the region the player is playing on
     - {level}: The level (Adventure Rank) of the player
@@ -47,6 +47,6 @@ class Settings:
     "The rate at which the RPC Client will update the presence"
     DISCORD_APPLICATION_ID: int = 929496938020208690  # Put your Discord Application ID if you want to change something
     "The Discord Application ID"
-    COOKIE: str = ""
-    "The cookie header sent by the browser (you can get it from the network tab in the developer tools of your browser)"
+    COOKIE: typing.Optional[str] = None
+    "The cookie header sent by the browser (you can get it from the network tab in the developer tools of your browser). It None, it will try to find it in the environment variable `COOKIE` or the `COOKIE` file in the root directory of the project"
 
