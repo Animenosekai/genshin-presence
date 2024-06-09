@@ -1,5 +1,5 @@
-import typing
 import dataclasses
+import typing
 
 from assets import characters, games, regions
 
@@ -9,10 +9,12 @@ class Player:
     GAME: games.Game = games.GENSHIN
     "The game you are playing"
     CHARACTER: characters.Character = characters.RAIDEN_SHOGUN
-    "The character you are playing"
-    HOYOLAB_UID: int = 71845688  # any account that has their game summary on their profile
+    "The character you are playing"  # any account that has their game summary on their profile
+    HOYOLAB_UID: int = 71845688
     "The HoYoLAB UID of the player"
-    SERVER_REGION: typing.Optional[regions.Region] = None  # leave as None to take the first one
+    SERVER_REGION: typing.Optional[
+        regions.Region
+    ] = None  # leave as None to take the first one
     "The server region of the player"
 
 
@@ -20,7 +22,6 @@ class Player:
 class Text:
     """
     Texts for the RPC Client
-    
     Available variables for the texts:
     - {name}: The nickname of the player
     - {region}: The name of the region the player is playing on

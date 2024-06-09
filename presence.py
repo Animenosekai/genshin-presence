@@ -1,17 +1,16 @@
 """
 presence.py
-
 A Genshin Impact Discord RPC Presence script which gives your AR and additional information while playing.
 """
 import dataclasses
 import importlib
 import os
+import pathlib
 import random
 import threading
 import time
 import types
 import typing
-import pathlib
 
 import nasse
 import pypresence
@@ -24,19 +23,23 @@ from nasse.utils.formatter import format
 @dataclasses.dataclass
 class GameData:
     game: games.Game
-    """The game"""
+    "The game"
     region: str
-    """The region the player is playing in"""
+    "The region the player is playing in"
     name: str
-    """The name of the player"""
+    "The name of the player"
     level: int
-    """The level of the player (ex: Adventure Rank on Genshin)"""
+    "The level of the player (ex: Adventure Rank on Genshin)"
+
 
 class GenshinPresence:
     """
     The Genshin Impact Discord RPC Presence
-
     It can connect to the Discord RPC and show the player's information while playing Genshin Impact
+
+    Raises
+    ------
+    ValueError
     """
 
     def __init__(self, config: types.ModuleType) -> None:
@@ -70,6 +73,7 @@ class GenshinPresence:
 
         Returns
         -------
+        pypresence.Presence
         Presence
             The Discord RPC Client
         """
@@ -93,6 +97,10 @@ class GenshinPresence:
         -------
         str
             The cookie
+
+        Raises
+        ------
+        ValueError
         """
         result = ""
         if self.config.Settings.COOKIE:
@@ -207,7 +215,7 @@ class GenshinPresence:
     def run(self) -> None:
         """
         Runs the presence in a loop
-        
+
         Warning: This method is blocking
         """
         # Avoid overlapping with other instances if ran in another thread
