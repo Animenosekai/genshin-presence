@@ -119,7 +119,7 @@ Get the cookie from the HoYoLAB website
 options:
   -h, --help            show this help message and exit
   --browser {chromium,firefox,webkit}
-                        The browser to use
+                        The browser to use (default: chromium)
   --executable EXECUTABLE
                         The path to the browser executable (optional)
 ```
