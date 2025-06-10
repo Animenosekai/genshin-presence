@@ -1,5 +1,5 @@
 nasse==2.0.2
-requests==2.32.3
+requests==2.32.4
 rich==13.7.1
 pypresence==4.3.0
 playwright==1.42.0
